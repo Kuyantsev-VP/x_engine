@@ -37,17 +37,13 @@
 #include <array>
 #include <sstream>
 
-namespace x_engine
-{
-namespace model
-{
+namespace x_engine {
+namespace model {
 // TODO write the docs
 // Write why alligment on 16 bytes is important!!
 // Also in this structure we store all enought information for particle which we
 // want to load from device it should be as small as possible for optimal
-template <class T, size_t dim = 4>
-struct alignas(16) particle
-{
+template <class T, size_t dim = 4> struct alignas(16) particle {
   typedef std::array<T, dim> container;
   container pos;
   container vel;
@@ -56,8 +52,7 @@ struct alignas(16) particle
   size_t get_dim() const { return dim; }
   T density;
   T pressure;
-  std::string pos_str()
-  {
+  std::string pos_str() {
     std::stringstream s;
     std::for_each(pos.begin(), pos.end(), [&s](T c) { s << c << ' '; });
     s << '\n';
@@ -65,7 +60,7 @@ struct alignas(16) particle
   }
   bool operator<(const particle<T> &p) { return cell_id < p.cell_id; }
 };
-}
-}
+} // namespace model
+} // namespace x_engine
 
 #endif

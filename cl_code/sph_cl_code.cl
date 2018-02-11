@@ -42,18 +42,21 @@
 #endif
 
 #ifdef _DOUBLE_PRECISION
-	#ifdef cl_khr_fp64
-		#pragma OPENCL EXTENSION cl_khr_fp64 : enable
-		
-	#elif defined(cl_amd_fp64)
-		#pragma OPENCL EXTENSION cl_amd_fp64 : enable
-		#define _DOUBLE_PRECISION
-	#else
-		#error "Double precision floating point not supported by OpenCL implementation."
-	#endif
+#ifdef cl_khr_fp64
+	#pragma OPENCL EXTENSION cl_khr_fp64 : enable
+	
+#elif defined(cl_amd_fp64)
+	#pragma OPENCL EXTENSION cl_amd_fp64 : enable
+	#define _DOUBLE_PRECISION
+#else
+	#error "Double precision floating point not supported by OpenCL implementation."
 #endif
-
+#endif
+#if defined(_WIN32) || defined(_WIN64)
 #include "inc\\ocl_struct.h"
+#else
+#include "inc/ocl_struct.h"
+#endif
 
 typedef struct particle_f{
 	float4 pos;
@@ -63,6 +66,7 @@ typedef struct particle_f{
 	float density;
 	float pressure;
 } particle_f;
+
 #ifdef _DOUBLE_PRECISION
 typedef struct particle_d{
 	double4 pos;
@@ -141,21 +145,21 @@ __kernel void _ker_neighbour_search(__global struct extendet_particle * ext_part
 
 }
 
-int cellId(
-		   int4 cellFactors_,
-		   uint gridCellsX,
-		   uint gridCellsY,
-		   uint gridCellsZ//don't use
+int cell_id(
+		   int4 cell_factors_,
+		   uint grid_cells_X,
+		   uint grid_cells_Y,
+		   uint grid_cells_Z//don't use
 		   )
 {
-	int cellId_ = cellFactors_.x + cellFactors_.y * gridCellsX
-		+ cellFactors_.z * gridCellsX * gridCellsY;
-	return cellId_;
+	int cell_id = cell_factors_.x + cell_factors_.y * grid_cells_X
+		+ cell_factors_.z * grid_cells_X * grid_cells_Y;
+	return cell_id;
 }
 /** Caculation spatial hash cellId for every particle
  *  Kernel fill up particleIndex buffer.
  */
- int4 cellFactors(
+ int4 cell_factors(
 				 __global struct 
 				#ifdef _DOUBLE_PRECISION
 					particle_d
@@ -163,17 +167,17 @@ int cellId(
 					particle_f
 				#endif 
 					* particle,
-				 float xmin,
-				 float ymin,
-				 float zmin,
-				 float hashGridCellSizeInv
+				 float x_min,
+				 float y_min,
+				 float z_min,
+				 float hash_grid_cell_size_inv
 				 )
 {
 	//xmin, ymin, zmin
 	int4 result;
-	result.x = (int)( particle->pos.x *  hashGridCellSizeInv );
-	result.y = (int)( particle->pos.y *  hashGridCellSizeInv );
-	result.z = (int)( particle->pos.z *  hashGridCellSizeInv );
+	result.x = (int)( particle->pos.x *  hash_grid_cell_size_inv );
+	result.y = (int)( particle->pos.y *  hash_grid_cell_size_inv );
+	result.z = (int)( particle->pos.z *  hash_grid_cell_size_inv );
 	return result;
 }
 __kernel void hashParticles(
@@ -204,53 +208,4 @@ __kernel void hashParticles(
 	PI_CELL_ID( result ) = cellId_;
 	PI_SERIAL_ID( result ) = id;
 	particleIndex[ id ] = result;*/
-}
-
-//__kernel void benchmarking() { 
-//	return;
-//}
-//
-//
-//void matrixMultiplication(__global float* A, __global float* B, __global float* C, int widthA, int widthB) {
-//	int i = get_global_id(0);
-//	int j = get_global_id(1);
-//	float value = 0;
-//	for (int k = 0; k < widthA; k++)
-//	{
-//		value = value + A[k + j * widthA] * B[k*widthB + i];
-//	}
-//	C[i + widthA * j] = value;
-//}
-
-typedef struct {
-	int width;
-	int height;
-	__global float* elements;
-} Matrix;
-// Thread block size
-#define BLOCK_SIZE 16
-// Matrix multiplication function called by MatMulKernel()
-void matrixMul(Matrix A, Matrix B, Matrix C)
-{
-	float Cvalue = 0;
-	int row = get_global_id(1);
-	int col = get_global_id(0);
-	for (int e = 0; e < A.width; ++e)
-		Cvalue += A.elements[row * A.width + e]
-		* B.elements[e * B.width + col];
-	C.elements[row * C.width + col] = Cvalue;
-}
-// Matrix multiplication kernel called by MatMulHost()
-__kernel void MatMulKernel(
-	int Awidth, int Aheight, __global float* Aelements,
-	int Bwidth, int Bheight, __global float* Belements,
-	int Cwidth, int Cheight, __global float* Celements,
-	int factor)
-{
-	Matrix A = { Awidth, Aheight, Aelements };
-	Matrix B = { Bwidth, Bheight, Belements };
-	Matrix C = { Cwidth, Cheight, Celements };
-	for (int i = 0; i < factor; ++i) { 
-		matrixMul(A, B, C);
-	}
 }
