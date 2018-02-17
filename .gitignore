@@ -30,9 +30,12 @@
 *.exe
 *.out
 *.app
-*.sln
+
+# VS files
+.sln
 
 # Folders
+# VS folders
 release/*
 .vs/*
 Debug/*

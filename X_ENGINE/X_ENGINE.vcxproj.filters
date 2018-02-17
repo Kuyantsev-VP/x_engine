@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\utils">
+      <UniqueIdentifier>{c91854b8-2aa7-4fce-8016-2f69649fda1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\util">
+      <UniqueIdentifier>{95fe28f0-248d-45c8-b2b0-3f3f095cee61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\OpenCL">
+      <UniqueIdentifier>{e8438e87-fbce-4fbc-ad74-b04a0d65e44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\cl_code">
+      <UniqueIdentifier>{7612cc21-c2d5-4dc1-a219-687fbb095aec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\x_engine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\ocl_helper.cpp">
+      <Filter>Исходные файлы\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\inc\isolver.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ocl_const.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ocl_solver.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\ocl_struct.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\particle.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\solver_container.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\sph_model.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\x_device.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\util\ocl_helper.h">
+      <Filter>Файлы заголовков\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\util\x_error.h">
+      <Filter>Файлы заголовков\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\OpenCL\cl.hpp">
+      <Filter>Файлы заголовков\OpenCL</Filter>
+    </ClInclude>
+    <ClInclude Include="measurement.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\cl_code\sph_cl_code.cl">
+      <Filter>Исходные файлы\cl_code</Filter>
+    </None>
+  </ItemGroup>
+</Project>
