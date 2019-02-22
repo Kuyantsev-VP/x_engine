@@ -33,6 +33,8 @@
 #ifndef X_CLCONST
 #define X_CLCONST
 
-#define NEIGHBOUR_COUNT                                                        \
+#define NEIGHBOR_COUNT                                                        \
   32 // NUMBER OF PARTICLES ON SPH SMOTHING PHYSYCAL PROPERTIES
+#define NO_CELL_ID -1
+#define NO_PARTICLE_ID -1
 #endif

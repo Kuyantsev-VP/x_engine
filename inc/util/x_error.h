@@ -12,6 +12,11 @@ class parser_error : public std::runtime_error {
 public:
   parser_error(const std::string &msg) : std::runtime_error(msg) {}
 };
+class partitions_consistency_error : public std::runtime_error {
+public:
+  partitions_consistency_error(const std::string &msg)
+      : std::runtime_error(msg) {}
+};
 
 template <typename T> std::string make_msg(const std::string &msg, T val) {
   std::stringstream ss;
@@ -29,6 +34,6 @@ std::string make_msg(const std::string &msg, T val, Args... args) {
   format_str = make_msg(format_str, args...);
   return format_str;
 }
-}
+} // namespace x_engine
 
 #endif

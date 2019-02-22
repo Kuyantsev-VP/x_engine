@@ -21,8 +21,10 @@ struct device {
   cl::Device dev;
   cl::Context context;
   size_t device_coumpute_unit_num; // criteria to sort devices
+  int device_work_group_size;
   bool operator<(const device &d1) {
-    return device_coumpute_unit_num < d1.device_coumpute_unit_num;
+    // return device_coumpute_unit_num < d1.device_coumpute_unit_num;
+    return t < d1.t;
   }
   void show_info() {
     char c_buffer[100];
@@ -68,6 +70,8 @@ private:
     t = ((int)c_buffer[0] == CL_DEVICE_TYPE_CPU) ? CPU : GPU;
     result =
         dev.getInfo(CL_DEVICE_MAX_COMPUTE_UNITS, &device_coumpute_unit_num);
+    result =
+        dev.getInfo(CL_DEVICE_MAX_WORK_GROUP_SIZE, &device_work_group_size);
   }
 };
 

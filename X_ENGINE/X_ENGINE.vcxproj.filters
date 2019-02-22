@@ -25,6 +25,12 @@
     <Filter Include="Исходные файлы\cl_code">
       <UniqueIdentifier>{7612cc21-c2d5-4dc1-a219-687fbb095aec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\test">
+      <UniqueIdentifier>{e3fec888-d6ed-44c1-b0e8-be3c2a26fa03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\spark">
+      <UniqueIdentifier>{d1576c6d-9c26-4cdf-a884-448dd7e304ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\x_engine.cpp">
@@ -69,6 +75,9 @@
       <Filter>Файлы заголовков\OpenCL</Filter>
     </ClInclude>
     <ClInclude Include="measurement.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\assert.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

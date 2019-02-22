@@ -53,9 +53,9 @@ struct alignas(16) particle
   container vel;
   size_t type;
   size_t cell_id;
-  size_t get_dim() const { return dim; }
   T density;
   T pressure;
+  size_t get_dim() const { return dim; }
   std::string pos_str()
   {
     std::stringstream s;

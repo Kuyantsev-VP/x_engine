@@ -40,15 +40,21 @@ enum SOLVER_TYPE { OCL = 1, CUDA, SINGLE, PARALLEL };
 using x_engine::model::partition;
 class i_solver {
 public:
-  // virtual void synk() = 0;
   virtual ~i_solver(){};
   virtual void run_neighbour_search() = 0;
   virtual void run_physic() = 0;
+  virtual void run_tests() = 0;
+  virtual void synch_preparation() = 0;
   virtual void init_model(const partition &) = 0;
+  virtual void show_info() = 0;
+  virtual void set_ordinal_num(int i) = 0;
+  virtual int get_ordinal_num() = 0;
+  virtual int get_device_type() = 0;
+  virtual double get_total_work_time() = 0;
 
 private:
   virtual void init_ext_particles() = 0;
 };
-}
-}
+} // namespace solver
+} // namespace x_engine
 #endif
